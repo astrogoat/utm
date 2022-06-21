@@ -1,20 +1,22 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Astrogoat\Utm;
 
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Settings\SkeletonSettings;
+use Astrogoat\Utm\Settings\UtmSettings;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+use Astrogoat\Utm\Http\Middleware\StoreUtmQueryParamsMiddleware;
+
+class UtmServiceProvider extends PackageServiceProvider
 {
     public function registerApp(App $app)
     {
         return $app
-            ->name('skeleton')
-            ->settings(SkeletonSettings::class)
+            ->name('utm')
+            ->settings(UtmSettings::class)
             ->migrations([
                 __DIR__ . '/../database/migrations',
                 __DIR__ . '/../database/migrations/settings',
@@ -32,6 +34,12 @@ class SkeletonServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name('skeleton')->hasViews();
+        $package->name('utm')->hasViews();
     }
+
+
+//    public function boot()
+//    {
+//        \Illuminate\Contracts\Http\Kernel::class->pushMiddleware(StoreUtmQueryparamsMiddleware::class);
+//    }
 }
