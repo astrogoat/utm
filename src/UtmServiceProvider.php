@@ -8,8 +8,6 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Astrogoat\Utm\Settings\UtmSettings;
 
-use Astrogoat\Utm\Http\Middleware\StoreUtmQueryParamsMiddleware;
-
 class UtmServiceProvider extends PackageServiceProvider
 {
     public function registerApp(App $app)
@@ -37,9 +35,4 @@ class UtmServiceProvider extends PackageServiceProvider
         $package->name('utm')->hasViews();
     }
 
-
-//    public function boot()
-//    {
-//        \Illuminate\Contracts\Http\Kernel::class->pushMiddleware(StoreUtmQueryparamsMiddleware::class);
-//    }
 }
