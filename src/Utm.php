@@ -4,7 +4,8 @@ namespace Astrogoat\Utm;
 
 class Utm
 {
-    public function createNoteAttribute() {
+    public function createNoteAttribute()
+    {
         $utmQueryParams = [
             'utm_source',
             'utm_medium',
@@ -15,7 +16,7 @@ class Utm
             'gclid',
             'ttclid',
             'irclid',
-            'user_id'
+            'user_id',
         ];
 
         $noteAttribute = [];
