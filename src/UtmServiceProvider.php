@@ -2,11 +2,11 @@
 
 namespace Astrogoat\Utm;
 
+use Astrogoat\Utm\Settings\UtmSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Astrogoat\Utm\Settings\UtmSettings;
 
 class UtmServiceProvider extends PackageServiceProvider
 {
@@ -34,5 +34,4 @@ class UtmServiceProvider extends PackageServiceProvider
     {
         $package->name('utm')->hasViews();
     }
-
 }
