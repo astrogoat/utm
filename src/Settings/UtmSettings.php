@@ -2,9 +2,9 @@
 
 namespace Astrogoat\Utm\Settings;
 
+use Astrogoat\Utm\Actions\UtmAction;
 use Helix\Lego\Settings\AppSettings;
 use Illuminate\Validation\Rule;
-use Astrogoat\Utm\Actions\UtmAction;
 
 class UtmSettings extends AppSettings
 {

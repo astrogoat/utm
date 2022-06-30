@@ -6,7 +6,6 @@ use Closure;
 
 class StoreUtmQueryParams
 {
-
     public function handle($request, Closure $next)
     {
         $utmQueryParams = [
@@ -19,7 +18,7 @@ class StoreUtmQueryParams
             'gclid',
             'ttclid',
             'irclid',
-            'user_id'
+            'user_id',
         ];
 
         foreach ($utmQueryParams as $utmQueryParam) {

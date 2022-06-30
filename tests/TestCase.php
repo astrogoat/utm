@@ -2,9 +2,9 @@
 
 namespace Astrogoat\Utm\Tests;
 
+use Astrogoat\Utm\UtmServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Astrogoat\Utm\UtmServiceProvider;
 
 class TestCase extends Orchestra
 {
