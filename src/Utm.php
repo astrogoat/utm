@@ -3,7 +3,6 @@
 namespace Astrogoat\Utm;
 
 use Illuminate\Support\Str;
-use function Pest\Laravel\put;
 
 class Utm
 {
@@ -19,7 +18,7 @@ class Utm
             'gclid',
             'ttclid',
             'irclid',
-            'user_id'
+            'user_id',
         ];
 
         $noteAttribute = [];
