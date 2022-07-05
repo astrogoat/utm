@@ -2,9 +2,13 @@
 
 namespace Astrogoat\Utm;
 
+use Illuminate\Support\Str;
+use function Pest\Laravel\put;
+
 class Utm
 {
-    public function createNoteAttribute() {
+    public function createNoteAttribute(): string
+    {
         $utmQueryParams = [
             'utm_source',
             'utm_medium',
@@ -22,17 +26,10 @@ class Utm
 
         foreach ($utmQueryParams as $utmQueryParam) {
             if (session()->has($utmQueryParam)) {
-                array_push($noteAttribute, [$utmQueryParam => session()->get($utmQueryParam)]);
+                $noteAttribute[$utmQueryParam] = session()->get($utmQueryParam);
             }
         }
 
-        // format object string
-        $first = str_replace('{', '', json_encode($noteAttribute));
-        $second = str_replace('}', '', $first);
-        $third = str_replace('"', '\"', $second);
-        $fourth = str_replace('[', '{', $third);
-        $five = str_replace(']', '}', $fourth);
-
-        return $five;
+        return Str::replace('"', '\"', json_encode($noteAttribute));
     }
 }
