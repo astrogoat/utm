@@ -2,11 +2,14 @@
 
 namespace Astrogoat\Utm;
 
+use Astrogoat\Utm\Http\Middleware\StoreUtmQueryParams;
 use Astrogoat\Utm\Settings\UtmSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
+use Illuminate\Support\Facades\Event;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Stancl\Tenancy\Events\TenancyBootstrapped;
 
 class UtmServiceProvider extends PackageServiceProvider
 {
@@ -25,6 +28,8 @@ class UtmServiceProvider extends PackageServiceProvider
 
     public function registeringPackage()
     {
+        $this->app->register(UtmRouteServiceProvider::class);
+
         $this->callAfterResolving('lego', function (LegoManager $lego) {
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
@@ -32,6 +37,6 @@ class UtmServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name('utm')->hasViews();
+        $package->name('utm')->hasViews()->hasConfigFile();
     }
 }

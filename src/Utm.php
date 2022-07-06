@@ -2,38 +2,37 @@
 
 namespace Astrogoat\Utm;
 
-class Utm
+use Astrogoat\Utm\Providers\Provider;
+use Astrogoat\Utm\Providers\Elevar;
+use Astrogoat\Utm\Settings\UtmSettings;
+use Illuminate\Http\Request;
+use Illuminate\Support\Manager;
+
+class Utm extends Manager
 {
-    public function createNoteAttribute()
+    public function createElevarDriver(): Provider
     {
-        $utmQueryParams = [
-            'utm_source',
-            'utm_medium',
-            'utm_campaign',
-            'utm_content',
-            'utm_term',
-            'fbclid',
-            'gclid',
-            'ttclid',
-            'irclid',
-            'user_id',
-        ];
+        return new Elevar();
+    }
 
-        $noteAttribute = [];
+    public function getSources(): array
+    {
+        return config('utm.sources', []);
+    }
 
-        foreach ($utmQueryParams as $utmQueryParam) {
-            if (session()->has($utmQueryParam)) {
-                array_push($noteAttribute, [$utmQueryParam => session()->get($utmQueryParam)]);
-            }
+    public function getMatchingRequestSources(Request $request): array
+    {
+        if (count($request->all()) === 0) {
+            return [];
         }
 
-        // format object string
-        $first = str_replace('{', '', json_encode($noteAttribute));
-        $second = str_replace('}', '', $first);
-        $third = str_replace('"', '\"', $second);
-        $fourth = str_replace('[', '{', $third);
-        $five = str_replace(']', '}', $fourth);
+        return array_filter($request->all(), function ($key) {
+            return in_array($key, $this->getSources());
+        }, ARRAY_FILTER_USE_KEY);
+    }
 
-        return $five;
+    public function getDefaultDriver()
+    {
+        return app(UtmSettings::class)->provider ?: 'elevar';
     }
 }
