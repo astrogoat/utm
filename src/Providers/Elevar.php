@@ -3,7 +3,6 @@
 namespace Astrogoat\Utm\Providers;
 
 use Astrogoat\Utm\Utm;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class Elevar implements Provider

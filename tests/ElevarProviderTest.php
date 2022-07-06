@@ -21,13 +21,13 @@ test('Scenario 1', function () {
     // 2. Second visit `utm_source=klaviyo&utm_medium=email`
     $this->provider->put([
         'utm_source' => 'klaviyo',
-        'utm_medium' => 'email'
+        'utm_medium' => 'email',
     ]);
 
     // 3. Final result in local storage `utm_source=klaviyo&utm_medium=email` note that the `gclid` was removed.
     expect($this->provider->toArray())->toBe([
         'utm_source' => 'klaviyo',
-        'utm_medium' => 'email'
+        'utm_medium' => 'email',
     ]);
 });
 
@@ -36,7 +36,7 @@ test('Scenario 2', function () {
     $this->provider->put([
         'gclid' => 'xxxx',
         'utm_source' => 'google',
-        'utm_medium' => 'cpc'
+        'utm_medium' => 'cpc',
     ]);
 
     // 2. Second visit `gclid=yyyy`

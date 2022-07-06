@@ -5,7 +5,6 @@ namespace Astrogoat\Utm\Http\Middleware;
 use Astrogoat\Utm\Utm;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class StoreUtmQueryParams
 {

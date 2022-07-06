@@ -2,8 +2,8 @@
 
 namespace Astrogoat\Utm;
 
-use Astrogoat\Utm\Providers\Provider;
 use Astrogoat\Utm\Providers\Elevar;
+use Astrogoat\Utm\Providers\Provider;
 use Astrogoat\Utm\Settings\UtmSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Manager;

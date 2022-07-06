@@ -2,7 +2,6 @@
 
 namespace Astrogoat\Utm\Settings;
 
-use Astrogoat\Utm\Actions\UtmAction;
 use Helix\Lego\Settings\AppSettings;
 use Illuminate\Validation\Rule;
 
