@@ -28,6 +28,8 @@ class Elevar implements Provider
             $this->currentParameters[$key] = $value;
         }
 
+        $this->currentParameters['user_id'] = session()->getId();
+
         session()->put('elevar', $this->currentParameters);
 
         return $this;
