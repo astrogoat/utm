@@ -25,6 +25,8 @@ class UtmServiceProvider extends PackageServiceProvider
 
     public function registeringPackage()
     {
+        $this->app->register(UtmRouteServiceProvider::class);
+
         $this->callAfterResolving('lego', function (LegoManager $lego) {
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
@@ -32,6 +34,6 @@ class UtmServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name('utm')->hasViews();
+        $package->name('utm')->hasViews()->hasConfigFile();
     }
 }

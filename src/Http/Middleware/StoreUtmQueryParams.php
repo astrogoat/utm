@@ -2,30 +2,19 @@
 
 namespace Astrogoat\Utm\Http\Middleware;
 
+use Astrogoat\Utm\Utm;
 use Closure;
+use Illuminate\Http\Request;
 
 class StoreUtmQueryParams
 {
-    public function handle($request, Closure $next)
-    {
-        $utmQueryParams = [
-            'utm_source',
-            'utm_medium',
-            'utm_campaign',
-            'utm_content',
-            'utm_term',
-            'fbclid',
-            'gclid',
-            'ttclid',
-            'irclid',
-            'user_id',
-        ];
+    protected Utm $utm;
 
-        foreach ($utmQueryParams as $utmQueryParam) {
-            if ($request->has($utmQueryParam)) {
-                session()->put($utmQueryParam, $request->input($utmQueryParam));
-            }
-        }
+    public function handle(Request $request, Closure $next)
+    {
+        $this->utm = app(Utm::class);
+
+        $this->utm->put($this->utm->getMatchingRequestSources($request));
 
         return $next($request);
     }

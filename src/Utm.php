@@ -2,33 +2,37 @@
 
 namespace Astrogoat\Utm;
 
-use Illuminate\Support\Str;
+use Astrogoat\Utm\Providers\Elevar;
+use Astrogoat\Utm\Providers\Provider;
+use Astrogoat\Utm\Settings\UtmSettings;
+use Illuminate\Http\Request;
+use Illuminate\Support\Manager;
 
-class Utm
+class Utm extends Manager
 {
-    public function createNoteAttribute(): string
+    public function createElevarDriver(): Provider
     {
-        $utmQueryParams = [
-            'utm_source',
-            'utm_medium',
-            'utm_campaign',
-            'utm_content',
-            'utm_term',
-            'fbclid',
-            'gclid',
-            'ttclid',
-            'irclid',
-            'user_id',
-        ];
+        return new Elevar();
+    }
 
-        $noteAttribute = [];
+    public function getSources(): array
+    {
+        return config('utm.sources', []);
+    }
 
-        foreach ($utmQueryParams as $utmQueryParam) {
-            if (session()->has($utmQueryParam)) {
-                $noteAttribute[$utmQueryParam] = session()->get($utmQueryParam);
-            }
+    public function getMatchingRequestSources(Request $request): array
+    {
+        if (count($request->all()) === 0) {
+            return [];
         }
 
-        return Str::replace('"', '\"', json_encode($noteAttribute));
+        return array_filter($request->all(), function ($key) {
+            return in_array($key, $this->getSources());
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public function getDefaultDriver()
+    {
+        return app(UtmSettings::class)->provider ?: 'elevar';
     }
 }

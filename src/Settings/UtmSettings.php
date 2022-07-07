@@ -2,33 +2,30 @@
 
 namespace Astrogoat\Utm\Settings;
 
-use Astrogoat\Utm\Actions\UtmAction;
 use Helix\Lego\Settings\AppSettings;
 use Illuminate\Validation\Rule;
 
 class UtmSettings extends AppSettings
 {
-    // public string $url;
+    public string $provider;
 
     public function rules(): array
     {
         return [
-            // 'url' => Rule::requiredIf($this->enabled === true),
+            'provider' => Rule::requiredIf($this->enabled === true),
         ];
     }
 
-    // protected static array $actions = [
-    //     UtmAction::class,
-    // ];
-
-    // public static function encrypted(): array
-    // {
-    //     return ['access_token'];
-    // }
+    public function providerOptions(): array
+    {
+        return [
+            'elevar' => 'Elevar',
+        ];
+    }
 
     public function description(): string
     {
-        return 'Interact with Utm.';
+        return 'Stores UTM parameters.';
     }
 
     public static function group(): string
