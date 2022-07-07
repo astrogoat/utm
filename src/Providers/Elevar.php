@@ -37,11 +37,7 @@ class Elevar implements Provider
 
     public function clear(): void
     {
-        foreach (app(Utm::class)->getSources() as $source) {
-            if (session()->has($source)) {
-                session()->remove($source);
-            }
-        }
+        session()->remove('elevar');
     }
 
     private function clearGclid(): void
