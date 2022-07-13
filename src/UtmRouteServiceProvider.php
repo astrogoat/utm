@@ -14,12 +14,8 @@ class UtmRouteServiceProvider extends RouteServiceProvider
     public function boot()
     {
         Event::listen(TenancyBootstrapped::class, function () {
-            try {
-                if (app(UtmSettings::class)->isEnabled()) {
-                    $this->pushMiddlewareToGroup('web', StoreUtmQueryParams::class);
-                }
-            } catch (MissingSettings) {
-                return;
+            if (! app()->runningInConsole() && app(UtmSettings::class)->isEnabled()) {
+                $this->pushMiddlewareToGroup('web', StoreUtmQueryParams::class);
             }
         });
     }
