@@ -7,7 +7,7 @@ class CreateUtmSettings extends SettingsMigration
     public function up(): void
     {
         $this->migrator->add('utm.enabled', false);
-        $this->migrator->add('utm.provider', 'elevar');
+        $this->migrator->add('utm.provider', '');
     }
 
     public function down()
